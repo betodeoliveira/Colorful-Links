@@ -1,10 +1,26 @@
-let originalTextColor;
-let originalBackgroundColor;
+// LINK TEXT
+$(".colorful-text-link").each(function (index) {
+    $(this).attr("original-text-color", $(this).css("color"));
+});
 
-$("a.colorful-link-block").mouseenter(function () {
-    originalTextColor = $(this).css("color");
-    originalBackgroundColor = $(this).css("background-color");
+$(".colorful-text-link").mouseenter(function () {
+    let availableColors = $(".colorful-text-link-list").children().length;
+    let randomNum = Math.floor(Math.random() * availableColors);
+    let selectedTextColor = $(".colorful-text-link-item").eq(randomNum).css("color");
 
+    $(this).css("color", selectedTextColor);
+})
+.mouseleave(function () {
+    $(this).css("color", $(this).attr("original-text-color"));
+});
+
+// LIK BLOCK
+$(".colorful-link-block").each(function (index) {
+    $(this).attr("original-text-color", $(this).css("color"));
+    $(this).attr("original-background-color", $(this).css("background-color"));
+});
+
+$(".colorful-link-block").mouseenter(function () {
     let availableColors = $(".colorful-link-block-list").children().length;
     let randomNum = Math.floor(Math.random() * availableColors);
     let selectedTextColor = $(".colorful-link-block-item").eq(randomNum).css("color");
@@ -12,8 +28,8 @@ $("a.colorful-link-block").mouseenter(function () {
 
     $(this).css("color", selectedTextColor);
     $(this).css("background-color", selectedBackgroundColor);
-    
-}).mouseleave(function () {
-    $(this).css("color", originalTextColor);
-    $(this).css("background-color", originalBackgroundColor);
+})
+.mouseleave(function () {
+    $(this).css("color", $(this).attr("original-text-color"));
+    $(this).css("background-color", $(this).attr("original-background-color"));
 });
